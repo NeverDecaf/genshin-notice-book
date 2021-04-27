@@ -16,15 +16,13 @@ fetch(CORS_PROXY+encodeURIComponent(EVENT_URL)+'&t='+Math.floor(new Date().getTi
 			
 			banner.src = article.banner;
 			content.appendChild(banner);
-			content.innerHTML += article.content.replace(/javascript:miHoYoGameJSSDK\.openInBrowser\('([^)]+)'\);/gi,'$1" target="_blank').replace(/&lt;(\/?t(?:| )[^&]*)&gt;/gi,'<$1>');
+			content.innerHTML += article.content.replace(/javascript:miHoYoGameJSSDK\.openIn(?:Webview|Browser)\('([^)]+)'\);/gi,'$1" target="_blank').replace(/&lt;(\/?t(?:| )[^&]*)&gt;/gi,'<$1>');
 			
 			title.innerHTML = article.title;
 			title.classList.add('title');
 			title.classList.add('article__title');
 			
-			
 			wrapper.setAttribute('id',article.ann_id);
-			// wrapper.appendChild(content);
 			// recreate news site structure so we can just reuse css
 			content.classList.add('article__content');
 			let body = document.createElement('div');
