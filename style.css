@@ -1,0 +1,127 @@
+:root
+{
+	--default-font-size: 16px;
+}
+div
+{
+	font-family: Helvetica;
+}
+html
+{
+	font-size: calc(10 * var(--default-font-size));
+}
+
+._article
+{
+	font-size: var(--default-font-size);
+	display: none;
+}
+._article._selected
+{
+	display: inline-block;
+}
+.title
+{
+	font-size: 1.5em;
+	padding-bottom: .2em;
+}
+.subtitle
+{
+	padding: 4px;
+	cursor: default;
+	font-size: 1.1em;
+	color: #333;
+	background-color: #f0f0f0;
+	border: transparent solid 3px;
+	border-radius: 5px;
+	min-height: 2.2em;
+	text-align: left;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	margin: 4px;
+	position: relative;
+	padding-right: .75em;
+}
+.subtitle._selected
+{
+	border: #e8cba7 solid 3px;
+}
+.subtitle:after {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	border-radius: 5px;
+	border: 2px solid #E0DDD7;
+}
+.subtitle._selected:after {
+	content: '🢒';
+	font-size: 2em;
+	line-height: 100%;
+	vertical-align: super;
+	display: flex;
+	align-items: center;
+	flex-flow: row-reverse;
+}
+
+#left,
+#right {
+	height: 100%;
+	overflow-y: auto;
+}
+#left {
+    float: left;
+    width: 15%;
+	font-size: var(--default-font-size);
+}
+#right {
+    float: left;
+    width: 85%;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+th, td {
+  padding-left: .2em;
+}
+
+/* tweaks to embedded css */
+img {
+	height: auto !important;
+	max-width: 90% !important;
+}
+p {
+	margin-top: .5em;
+	margin-bottom: .5em;
+	min-height: 1em !important;
+}
+/* ol, li, p{ */
+	/* line-height: 1 !important; */
+	/* min-height: 1em !important; */
+/* } */
+/* ripped from the official genshin news site: https://genshin.mihoyo.com/_nuxt/b85b91ea7321641f4275.js */
+@font-face{font-family:'icomoon';src:url("https://webstatic-sea.mihoyo.com/hk4e/upload/fonts/icomoon.eot");src:url("https://webstatic-sea.mihoyo.com/hk4e/upload/fonts/icomoon.eot") format("embedded-opentype"),url("https://webstatic-sea.mihoyo.com/hk4e/upload/fonts/icomoon.ttf") format("truetype"),url("https://webstatic-sea.mihoyo.com/hk4e/upload/fonts/icomoon.woff") format("woff"),url("https://webstatic-sea.mihoyo.com/hk4e/upload/fonts/icomoon.svg") format("svg");font-weight:normal;font-style:normal;font-display:block}
+[class^="icon-"],[class*=" icon-"]{font-family:'icomoon' !important;speak:none;font-style:normal;font-weight:normal;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+.cate{border-top:#e8cba7 solid 6px}.news_detail{background:#4d6e80 url() no-repeat top center;background-size:100% auto}.news_wrap{display:flex;justify-content:center;align-items:flex-start;position:relative;width:100%;padding-top:66px;padding-bottom:210px}.news_wrap .body{position:relative;width:900px;min-height:390px}.news_wrap .body .ellipsis{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.news_wrap .body .topbar{display:flex;justify-content:space-between;margin-top:80px;width:100%;height:50px;vertical-align:top}.news_wrap .body .topbar__breadcrumb{display:flex;justify-content:center;align-items:center;font-size:16px;height:18px;line-height:18px}.news_wrap .body .topbar__breadcrumb>span{display:inline-block}.news_wrap .body .topbar__node{color:#808080;text-decoration:none}.news_wrap .body .topbar__node:hover{color:#fff}.news_wrap .body .topbar__arraw{width:24px;color:#aaa;text-align:center}.news_wrap .body .topbar__title{color:#cfcfcf;line-height:30px;max-width:550px}.news_wrap .body .topbar__back{width:138px;color:#ccc;text-decoration:none;text-align:right;font-size:16px}.news_wrap .body .topbar__back:hover{color:#fff}.news_wrap .body .article{position:relative;background-color:#f0f0f0;padding:79px 90px 115px;min-height:601px;font-size:0}.news_wrap .body .article__title{line-height:40px;font-size:32px;color:#333}.news_wrap .body .article__date{margin-top:13px;font-size:16px;line-height:22px;color:#999}.news_wrap .body .article__cover{width:100%;height:auto;margin:46px auto 0}.news_wrap .body .article__content{margin-top:51px;font-size:14px;color:#7d7d7d;line-height:24px;display:flex;flex-direction:column}.news_wrap .body .article__content>*{max-width:720px}.news_wrap .body .article__content *{word-break:break-word;word-wrap:break-word}.news_wrap .body .article__content a{color:#1795b6 !important;text-decoration:none}.news_wrap .body .article__content a,.news_wrap .body .article__content a:visited{color:#a7864f !important}.news_wrap .body .article__content a:hover{text-decoration:underline}.news_wrap .body .article__content ol,.news_wrap .body .article__content ul{margin:15px}.news_wrap .body .article__content img,.news_wrap .body .article__content video,.news_wrap .body .article__content table{max-width:100% !important;height:unset !important}.news_wrap .body .article__content table{margin:0 auto;border-collapse:collapse;border-spacing:0;width:100%}.news_wrap .body .buttombar{position:absolute;left:50%;bottom:41px;display:flex;justify-content:space-between;width:721px;margin:24px 0 0 0;transform:translateX(-50%);-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.news_wrap .body .buttombar__prev,.news_wrap .body .buttombar__next{width:70px;height:44px;background:#393b40 url() no-repeat center;background-size:14px 23px;border-radius:4px;opacity:0.8;text-align:center;font-size:16px;color:#ccc;cursor:pointer;text-decoration:none}.news_wrap .body .buttombar__prev:hover,.news_wrap .body .buttombar__next:hover{background-color:#565961}.news_wrap .body .buttombar__prev--disabled,.news_wrap .body .buttombar__next--disabled{background-color:#9ea1a8;cursor:inherit;pointer-events:none}.news_wrap .body .buttombar__prev{transform:rotate(180deg)}.news_wrap .latest{width:355px;background-color:#f0f0f0;margin-top:130px;margin-left:25px;border-radius:1px;padding-bottom:60px}.news_wrap .latest__title{width:100%;height:34px;background:rgba(18,18,18,0.04);color:#333;line-height:34px;font-size:16px;font-weight:600;text-align:center;margin-top:31px}.news_wrap .latest__item{display:flex;width:100%;padding:10px 20px;box-sizing:border-box;cursor:pointer}.news_wrap .latest__item:hover{background:#e3e3e5}.news_wrap .latest__item:first-child{margin-top:4px}.news_wrap .latest__item img{flex-shrink:0;width:140px;height:70px}.news_wrap .latest__info{margin-left:10px;word-break:break-word;word-wrap:break-word}.news_wrap .latest__info p{line-height:20px}.news_wrap .latest__info p:first-child{min-height:40px;color:#393b40;font-size:16px}.news_wrap .latest__date{font-size:14px;color:#999;margin-top:5px}@media screen and (max-width: 1350px){.news_wrap .latest{display:none}}
+
+/* make some modifications to the above css */
+.news_wrap {
+	padding: 0;
+}
+.news_wrap .body .article__content > * {
+	max-width: 100%
+}
+.news_wrap .body{
+	width: 100%;
+	max-width: 1400px;
+}
+body {
+	background:#4d6e80 url(https://genshin.mihoyo.com/_nuxt/img/ea6ea46.jpg) no-repeat top center;
+	background-size:100% auto;
+}
