@@ -90,6 +90,13 @@ th, td {
   padding-left: .2em;
 }
 
+p[data-timezone]::after, span[data-timezone]::after {
+	content: attr(data-timezone);
+}
+span[data-timezone]::after {
+	color: #7d7d7d;
+}
+
 /* tweaks to embedded css */
 img {
 	height: auto !important;

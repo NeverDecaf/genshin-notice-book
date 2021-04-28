@@ -56,5 +56,22 @@ fetch(CORS_PROXY+encodeURIComponent(EVENT_URL)+'&t='+Math.floor(new Date().getTi
 		first.classList.add('_selected');
 		document.getElementById(first.getAttribute('ann_id')).classList.add('_selected');
 		Array.from(document.getElementsByClassName('subtitle')).forEach(e=> {if (e.getAttribute('ann_id')==window.location.hash.substring(1)) {e.click()}});
+		
+		// convert all <t> (time) elements to local browser timezone:
+		document.querySelectorAll('\\t').forEach(t => {
+			let d = new Date(t.innerHTML + "+0800")
+			let tz_offset = new Date().getTimezoneOffset()
+			t.innerHTML = new Date(d - tz_offset * 60000).toISOString().slice(0,-5).replace('T',' ')
+			let tz_string = ' (UTC';
+			if (tz_offset > 0)
+				tz_string += '-'
+			else
+				tz_string += '+'
+			tz_string += Math.floor(Math.abs(tz_offset)/60)
+			if (Math.abs(tz_offset)%60)
+				tz_string += ("00" + (Math.abs(tz_offset)%60)).slice(-2);
+			tz_string += ')';
+			t.parentNode.setAttribute('data-timezone',tz_string)
+		});
 	}
 })
