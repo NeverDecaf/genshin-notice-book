@@ -59,8 +59,8 @@ html
 	border: 2px solid #E0DDD7;
 }
 .subtitle._selected:after {
-	content: '🢒';
-	font-size: 2em;
+	content: '❱';
+	font-size: 1em;
 	line-height: 100%;
 	vertical-align: super;
 	display: flex;
