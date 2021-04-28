@@ -69,7 +69,7 @@ fetch(CORS_PROXY+encodeURIComponent(EVENT_URL)+'&t='+Math.floor(new Date().getTi
 				tz_string += '+'
 			tz_string += Math.floor(Math.abs(tz_offset)/60)
 			if (Math.abs(tz_offset)%60)
-				tz_string += ("00" + (Math.abs(tz_offset)%60)).slice(-2);
+				tz_string += ':' + ("00" + (Math.abs(tz_offset)%60)).slice(-2);
 			tz_string += ')';
 			t.parentNode.setAttribute('data-timezone',tz_string)
 		});
