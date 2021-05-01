@@ -63,7 +63,7 @@ fetch(CORS_PROXY+encodeURIComponent(EVENT_URL)+'&t='+Math.floor(new Date().getTi
 			if (t.classList.contains('t_lc')) // local (server) time, t_gl is GMT+0
 				d = new Date(t.innerHTML + "-0500")
 			let tz_offset = new Date().getTimezoneOffset()
-			t.innerHTML = new Date(d - tz_offset * 60000).toISOString().slice(0,-5).replace('T',' ')
+			t.innerHTML = new Date(d - tz_offset * 60000).toISOString().slice(0,-8).replace('T',' ').replace(/-/g,'/');
 			let tz_string = ' (UTC';
 			if (tz_offset > 0)
 				tz_string += '-'
