@@ -14,6 +14,7 @@ String.prototype.hashCode = function() {
 };
 
 const LS_ARTICLE_HASHES_NAME = 'articles';
+const FIRST_RUN = localStorage.getItem(LS_ARTICLE_HASHES_NAME) == undefined;
 var ARTICLE_HASHES = JSON.parse(localStorage.getItem(LS_ARTICLE_HASHES_NAME) || '{}');
 
 function updateStorage(ann_id, new_hash) {
@@ -79,10 +80,14 @@ fetch(CORS_PROXY+encodeURIComponent(EVENT_URL)+'&t='+Math.floor(new Date().getTi
 			document.getElementById('left').appendChild(subtitle);
 
 			// set read status from localStorage:
-			if (article.ann_id in ARTICLE_HASHES)
+			if (article.ann_id in ARTICLE_HASHES) {
 				if (hash != ARTICLE_HASHES[article.ann_id]) {
 					subtitle.classList.add('_unread')
 				}
+			}
+			else if (!FIRST_RUN) {
+				subtitle.classList.add('_unread')
+			}
 		});
 
 		// remove stale ann_ids from localStorage
