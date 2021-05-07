@@ -1,5 +1,26 @@
 const EVENT_URL = 'https://hk4e-api-os.mihoyo.com/common/hk4e_global/announcement/api/getAnnContent?game=hk4e&game_biz=hk4e_global&lang=en&bundle_id=hk4e_global&platform=pc&region=os_usa&level=60'
 const CORS_PROXY = "https://jsonp.afeld.me/?url="
+
+// https://stackoverflow.com/questions/7616461/generate-a-hash-from-string-in-javascript
+String.prototype.hashCode = function() {
+  var hash = 0, i, chr;
+  if (this.length === 0) return hash;
+  for (i = 0; i < this.length; i++) {
+    chr   = this.charCodeAt(i);
+    hash  = ((hash << 5) - hash) + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash;
+};
+
+const LS_ARTICLE_HASHES_NAME = 'articles';
+var ARTICLE_HASHES = JSON.parse(localStorage.getItem(LS_ARTICLE_HASHES_NAME) || '{}');
+
+function updateStorage(ann_id, new_hash) {
+	ARTICLE_HASHES[ann_id] = new_hash;
+	localStorage.setItem(LS_ARTICLE_HASHES_NAME, JSON.stringify(ARTICLE_HASHES));
+}
+
 // fetch("test.json")
 fetch(CORS_PROXY+encodeURIComponent(EVENT_URL)+'&t='+Math.floor(new Date().getTime()/1000))
 .then(res => res.json())
@@ -41,6 +62,7 @@ fetch(CORS_PROXY+encodeURIComponent(EVENT_URL)+'&t='+Math.floor(new Date().getTi
 			subtitle.innerHTML = article.subtitle;
 			subtitle.classList.add('subtitle');
 			subtitle.setAttribute('ann_id',article.ann_id);
+			let hash = article.content.hashCode();
 			subtitle.onclick = ()=> {
 				document.getElementsByClassName('_article');
 				Array.from(document.getElementsByClassName('_article')).forEach(e=> {e.classList.remove('_selected')});
@@ -48,10 +70,28 @@ fetch(CORS_PROXY+encodeURIComponent(EVENT_URL)+'&t='+Math.floor(new Date().getTi
 				Array.from(document.getElementsByClassName('subtitle')).forEach(e=> {e.classList.remove('_selected')});
 				subtitle.classList.add('_selected');
 				window.location.hash = article.ann_id;
+				updateStorage(article.ann_id, hash);
+				subtitle.classList.remove('_unread')
 			}
+			let badge = document.createElement('span');
+			badge.classList.add('badge');
+			subtitle.appendChild(badge);
 			document.getElementById('left').appendChild(subtitle);
+
+			// set read status from localStorage:
+			if (article.ann_id in ARTICLE_HASHES)
+				if (hash != ARTICLE_HASHES[article.ann_id]) {
+					subtitle.classList.add('_unread')
+				}
 		});
-		
+
+		// remove stale ann_ids from localStorage
+		let current_articles = Array.from(json.data.list).map(e => e.ann_id.toString());
+		Object.keys(ARTICLE_HASHES).forEach(ann_id => {
+			if (!current_articles.includes(ann_id))
+				delete ARTICLE_HASHES[ann_id]
+		})
+
 		let first = document.getElementsByClassName('subtitle')[0];
 		first.classList.add('_selected');
 		document.getElementById(first.getAttribute('ann_id')).classList.add('_selected');
